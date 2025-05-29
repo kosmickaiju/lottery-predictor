@@ -1,8 +1,7 @@
-### Updated scraper.py (with detailed headers)
-
 import requests
 import pandas as pd
 
+#pulling from api
 api_url = 'https://apim-website-prod-eastus.azure-api.net/scratchgamesapp/getTopPrizesRemaining'
 
 headers = {
