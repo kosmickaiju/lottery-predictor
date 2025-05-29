@@ -1,10 +1,16 @@
+### Updated scraper.py (with detailed headers)
+
 import requests
 import pandas as pd
 
 api_url = 'https://apim-website-prod-eastus.azure-api.net/scratchgamesapp/getTopPrizesRemaining'
 
 headers = {
-    'User-Agent': 'Mozilla/5.0'
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36',
+    'Accept': 'application/json',
+    'Origin': 'https://floridalottery.com',
+    'Referer': 'https://floridalottery.com/',
+    'X-Partner': 'web'
 }
 
 response = requests.get(api_url, headers=headers)
@@ -22,7 +28,7 @@ if response.status_code == 200:
         ticket_price = item.get('TicketPrice', 0)
         
         if item.get('TopPrizes') and isinstance(item['TopPrizes'], list) and len(item['TopPrizes']) > 0:
-            top_prize_info = item['TopPrizes'][0]  # Assuming first prize is the top one
+            top_prize_info = item['TopPrizes'][0]
             top_prize = top_prize_info.get('TopPrize', 'N/A').strip()
             top_remaining_str = top_prize_info.get('TopPrizesRemaining', '0 of 0').strip()
             top_remaining_count = top_remaining_str.split('of')[0].strip()
